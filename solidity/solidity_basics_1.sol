@@ -7,6 +7,7 @@ pragma solidity >=0.5.0 <0.6.0; // version in solidity
 // state variables are permanently stored in contract storage. This means that they are written to ethereum blockchain. Think of them like writing to the DB
 contract ZombieFactory {
 
+    // event are a way to communicate that something happened on the blockchain to our app on the front-end 
     event NewZombie(uint zombieId, string name, uint dna);
 
     uint dnaDigits = 16; // this will be permanently stored in the database on blockchain. unint normally meant for uint 256 if we need 8,16 or 32 bits uint then we need to put it like uint8, uint16, etc.
@@ -27,7 +28,7 @@ contract ZombieFactory {
 
     function _createZombie(string memory _name, uint _dna) private {
         uint id = zombies.push(Zombie(_name, _dna)) - 1; // push is used to append to the array the new value
-        emit NewZombie(id, _name, _dna);
+        emit NewZombie(id, _name, _dna); // triggering the event defined above 
     }
 
     // Look at the function declaration in solidity 
@@ -36,8 +37,12 @@ contract ZombieFactory {
     // other way of passing the value is by reference i.e the function will take in the variable by reference and if in the course of oepration of the function the variable changes it will also change the original value of the function
     // passing the variable name with underscore is a convention in order to differntiate them for global variables 
     // in solidity functions are considered private by default that means anyone can call the function and execute. It is a good practice to make all the function private and only change them back to public if we need them. 
+    // we define the returns stating the data type of the return variable. We can return the variable as a memory 
+    // Function can be of two types view and pure. View function only view the data but does not modify the data whereas pure function does not access any data from the app, its completely relient on its inout that it takes. 
+
+    // Typecasting : Lets say we have two variables as uint a and uint8 b and we do the the product of these two variables and store them in uint8 we might get an error and we need to typecast uint a as uint8 a. 
     function _generateRandomDna(string memory _str) private view returns (uint) {
-        uint rand = uint(keccak256(abi.encodePacked(_str)));
+        uint rand = uint(keccak256(abi.encodePacked(_str))); // keccak is a hash function based on SHA 256 
         return rand % dnaModulus;
     }
 
