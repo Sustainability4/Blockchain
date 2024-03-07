@@ -32,6 +32,9 @@ contract Ownable {
   /**
   * @dev Throws if called by any account other than the owner.
   */
+
+  // Modifier function in a contract act as a pre condition for running a function in a contract. In case of ownable file we are using 
+  // the function to verify the owner. 
   modifier onlyOwner() {
     require(isOwner());
     _;
@@ -50,6 +53,7 @@ contract Ownable {
   * It will not be possible to call the functions with the `onlyOwner`
   * modifier anymore.
   */
+  // This is how we assign a modifier function to another function as a mandatory call. 
   function renounceOwnership() public onlyOwner {
     emit OwnershipTransferred(_owner, address(0));
     _owner = address(0);
