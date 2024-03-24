@@ -48,7 +48,10 @@ module.exports = {
   }
 };
 ```
-10. 
+10. truffle migrate --network rinkeby. We first deploy on rinkeby as it does not consume ether and help us test our code before we deploy it to the mainnet. truffle migrate --network mainnet. One can add other methods to the above file truffle.js and can have deployment made to those networks.
+
+### Testing Code with Ganache 
+
 
 
 
