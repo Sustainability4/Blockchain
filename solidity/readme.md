@@ -10,7 +10,7 @@
 ├── dist (or build
 ├── test (test cases as once the solidity code is deployed on the ethereum it can't be changed)
 ├── truffle-config.js
-├── truffle.js
+└── truffle.js
 
 6. fff
 7. 
