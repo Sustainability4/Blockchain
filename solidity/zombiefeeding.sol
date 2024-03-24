@@ -43,6 +43,7 @@ contract ZombieFeeding is ZombieFactory {
       return (_zombie.readyTime <= now);
   }
 
+  // in this function the idea of onlyOwnerOf is a function modifier which will restrict this function to only the owner of the contract. 
   function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal onlyOwnerOf(_zombieId) {
     Zombie storage myZombie = zombies[_zombieId]; // storage and memory variable differ in terms that storage variables get permanently stored on
     // on a blockchain whereas memory variables get stored in a copy and are removed from the storage once the function call is over. 
