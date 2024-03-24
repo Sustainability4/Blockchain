@@ -1,4 +1,5 @@
 ## Obtained from the Course : [Link](https://cryptozombies.io/en/course)
+## Take a look at [loom documentation](https://loomx.io/developers/en/intro-to-loom.html)
 
 ### Idea on the usage of GAS
 
