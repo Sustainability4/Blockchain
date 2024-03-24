@@ -101,6 +101,23 @@ Test folder will help us provide for tests within the java script and solidity b
       2. act: where we actually test the code. Always make sure you test only one thing.
       3. assert: where we check the results.
 6. There is a concept of hooks in truffle and ganache. What hooks do is that they help us create some calls that needs to be run before each test. Each test is a independent snippet in itself. The test needs to create a new instance always before it excutes itself. Hence rather than writing this script with every test snippet we can centralise it. Similarly we can have an after.each function which can self destruct the instance after the test is executed as we do not want our blockchain to bloat.
-7. One can group tests using a context function. Which allows you to group similar tests together and make the code more scalable. 
+7. One can group tests using a context function. Which allows you to group similar tests together and make the code more scalable. Placing x in front of context function or the it function help us skip the tests. When we are just in development of the code its better to put x in front of those definitions so that we can skip those tests.
+8. There is a cooldown time defined so our test might fail as we have nothing called time travel on blockchain and hence ganache helps us there to provide a time travel idea for our blockchain.
+9. Using assert built in module is great but it has some limitations. The code doesn't read well. We use **chai** for that purpose.
+```
+1. expect: lets you chain natural language assertions as follows:
 
+let lessonTitle = "Testing Smart Contracts with Truffle";
+expect(lessonTitle).to.be.a("string");
+
+2. should: allows for similar assertions as expect interface, but the chain starts with a should property:
+
+let lessonTitle = "Testing Smart Contracts with Truffle";
+lessonTitle.should.be.a("string");
+
+3. assert: provides a notation similar to that packaged with node.js and includes several additional tests and it's browser compatible:
+
+let lessonTitle = "Testing Smart Contracts with Truffle";
+assert.typeOf(lessonTitle, "string");
+```
 
