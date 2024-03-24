@@ -2,7 +2,9 @@
 
 ### Idea on the usage of GAS
 
-gas is like the money we spend in solidity. Gas depends upon the space optimisation and the computation optimisation of the solidity code. Hence space and time complexity become very important for a solidity code. Space needs to be optimised by using fifferent versions of the variables like uint. uint is a 256 bit but we may not need such a heavy storage and hence we can turn back onto uint 8 or uint 16. Also while defining these units in a struct its very important to keep them packed closed. For e.g. uint 16 should be packed near uint 16 and similarly for other uint variables. 
+gas is like the money we spend in solidity. Gas depends upon the space optimisation and the computation optimisation of the solidity code. Hence space and time complexity become very important for a solidity code. Space needs to be optimised by using fifferent versions of the variables like uint. uint is a 256 bit but we may not need such a heavy storage and hence we can turn back onto uint 8 or uint 16. Also while defining these units in a struct its very important to keep them packed closed. For e.g. uint 16 should be packed near uint 16 and similarly for other uint variables.
+
+View and Pure functions does not cost gas technically. Also, the memory storage is better than permanent storage as permanent storage cost significant gas. 
 
 ### Deployment with Truffle
 1. Make sure that the npm and node has been installed on your computer
