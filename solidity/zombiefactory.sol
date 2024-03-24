@@ -1,6 +1,8 @@
 // version pragma is used to esnure a similar environment for all the solidity codes. 
 pragma solidity ^0.4.25;
 
+// Ownable is a special contract that helps us that we can provide some functionalities that can only be accessed by the owners of the contract 
+// not everyone. 
 import "./ownable.sol"; // importing other scripts 
 import "./safemath.sol";
 
