@@ -8,7 +8,39 @@ contract("CryptoZombies", (accounts) => {
     let [alice, bob] = accounts; // initilisation of alice and bob for simplicity, ganache creates 10 blockc in array but its not easy to reference every time
     let contractInstance; 
     // Before each and after each functions. before each helps to execute this function before every test case run and after each can be defined in a sam e way 
-    /* */
+    /* If you really, really want to achieve mastery, go ahead and read on. Otherwise... just click next and off you go to the next chapter.
+
+You still around?😁
+
+Awesome! After all, why would you want to deny yourself a whole lot of awesomeness?
+
+Now, let's circle back to how contract.new works. Basically, every time we call this function, Truffle makes it so that a new contract gets deployed.
+
+On one side, this is helpful because it lets us start each test with a clean sheet.
+
+On the other side, if everybody would create countless contracts the blockchain will become bloated. We want you to hang around, but not your old test contracts!
+
+We would want to prevent this from happening, right?
+
+Happily, the solution is pretty straightforward... our contract should selfdestruct once it's no longer needed.
+
+The way this works is as follows:
+
+first, we would want to add a new function to the CryptoZombies smart contract like so:
+
+function kill() public onlyOwner {
+   selfdestruct(owner());
+}
+Note: If you want to learn more about selfdestruct(), you can read the Solidity docs here. The most important thing to bear in mind is that selfdestruct is the only way for code at a certain address to be removed from the blockchain. This makes it a pretty important feature!
+
+next, somewhat similar to the beforeEach() function explained above, we'll make a function called afterEach():
+
+afterEach(async () => {
+   await contractInstance.kill();
+});
+Lastly, Truffle will make sure this function is called after a test gets executed.
+
+And voila, the smart contract removed itself!*/
     beforeEach(async () => {
         contractInstance = await CryptoZombies.new();
     });
@@ -30,6 +62,7 @@ contract("CryptoZombies", (accounts) => {
             expect(newOwner).to.equal(bob);
         })
     })
+    // context function helps group multiple tests into one. If we put x before any context function or it. That test will get skipped. 
     context("with the two-step transfer scenario", async () => {
         it("should approve and then transfer a zombie when the approved address calls transferFrom", async () => {
             const result = await contractInstance.createRandomZombie(zombieNames[0], {from: alice});
