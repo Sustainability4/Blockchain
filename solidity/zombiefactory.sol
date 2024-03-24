@@ -56,6 +56,8 @@ contract ZombieFactory is Ownable {
   // modifiers 
   function _createZombie(string _name, uint _dna) internal {
     // push function help us push new values to array
+    // Notice the time units. Now will give you a time from the existance of the block till now which will be in seconds
+    // you can add to now in days, minutes, hours , seconds. It converts everything to seconds and store it. These are all pre-declared. 
     uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
     zombieToOwner[id] = msg.sender; // msg.sender is a global variable which will give us the address of the sender who called the function.
     ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].add(1);
