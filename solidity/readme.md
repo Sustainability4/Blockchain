@@ -1,4 +1,4 @@
-## Obtained from the Course : (Link)[https://cryptozombies.io/en/course]
+## Obtained from the Course : [Link](https://cryptozombies.io/en/course)
 
 ### Deployment with Truffle
 1. Make sure that the npm and node has been installed on your computer
