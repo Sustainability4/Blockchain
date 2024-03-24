@@ -1,10 +1,11 @@
 // version pragma is used to esnure a similar environment for all the solidity codes. 
 pragma solidity ^0.4.25;
 
-import "./ownable.sol";
+import "./ownable.sol"; // importing other scripts 
 import "./safemath.sol";
 
-// contract is the basic building block of solidity. even the solidity libraries are written as contracts. 
+// contract is the basic building block of solidity. even the solidity libraries are written as contracts.
+// Look at the inheretance created for ZombieFactory function as it inherits from Ownable
 contract ZombieFactory is Ownable {
 
   using SafeMath for uint256;
@@ -37,6 +38,8 @@ contract ZombieFactory is Ownable {
   // As soon as we declare an array public a getter method will be declared for that array. 
   Zombie[] public zombies;
 
+  // Mappings and address are datatypes which helps map a variable to another variable 
+  // Address is a datatype which helps define address. 
   mapping (uint => address) public zombieToOwner;
   mapping (address => uint) ownerZombieCount;
 
@@ -52,7 +55,7 @@ contract ZombieFactory is Ownable {
   function _createZombie(string _name, uint _dna) internal {
     // push function help us push new values to array
     uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
-    zombieToOwner[id] = msg.sender;
+    zombieToOwner[id] = msg.sender; // msg.sender is a global variable which will give us the address of the sender who called the function.
     ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].add(1);
     // emit is used to communicate the information to an event. 
     emit NewZombie(id, _name, _dna);
@@ -69,7 +72,7 @@ contract ZombieFactory is Ownable {
   }
 
   function createRandomZombie(string _name) public {
-    require(ownerZombieCount[msg.sender] == 0);
+    require(ownerZombieCount[msg.sender] == 0); // this is a necessary condition for this function to execute
     uint randDna = _generateRandomDna(_name);
     randDna = randDna - randDna % 100;
     _createZombie(_name, randDna);
