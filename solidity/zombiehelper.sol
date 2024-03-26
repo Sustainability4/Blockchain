@@ -20,6 +20,7 @@ contract ZombieHelper is ZombieFeeding {
     levelUpFee = _fee;
   }
 
+  /* payable function is a very interesting type of a function that helps this function receive ether */
   function levelUp(uint _zombieId) external payable {
     require(msg.value == levelUpFee);
     zombies[_zombieId].level = zombies[_zombieId].level.add(1);
