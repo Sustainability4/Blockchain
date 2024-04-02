@@ -137,4 +137,4 @@ assert.typeOf(lessonTitle, "string");
 │   └── truffle-config.js
 └── package.json
 ```
-2. We need a caller smart contract in caller folder to interact with the oracle smart contract in the oracle folder. 
+2. We need a caller smart contract in caller folder to interact with the oracle smart contract in the oracle folder. Now one might be calling an asynchronous function through oracle which might not return the final value but an id for the request made. 
