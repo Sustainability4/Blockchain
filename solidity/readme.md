@@ -121,4 +121,20 @@ lessonTitle.should.be.a("string");
 let lessonTitle = "Testing Smart Contracts with Truffle";
 assert.typeOf(lessonTitle, "string");
 ```
+## Oracle 
 
+1. We need two directories one directory for oracle an dother for caller contract. Oracle pieces will live in oracle directory and caller pieces will live in caller directory.
+```.
+├── caller
+│   ├── contracts
+│   ├── migrations
+│   ├── test
+│   └── truffle-config.js
+├── oracle
+│   ├── contracts
+│   ├── migrations
+│   ├── test
+│   └── truffle-config.js
+└── package.json
+```
+2. We need a caller smart contract in caller folder to interact with the oracle smart contract in the oracle folder. 
