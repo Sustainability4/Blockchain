@@ -35,8 +35,8 @@ contract Auction {
     Step 2 : Declaring the Constructor
     */
 
-    constructor (){
-        owner = payable(msg.sender); // notice we converted msg.sender to the payable address as owner has been declared payable.
+    constructor (address EOA){
+        owner = payable(EOA); // notice we converted msg.sender to the payable address as owner has been declared payable.
         auctionState = State.Running;
         startBlock = block.number; // starting the auction, we can start the auction in future by using that one block gets generated on ethereum every 50 seconds 
         // Lets say you want to end auction a week later : number of blocks = 7*24*60*60/50 = 40320
@@ -139,4 +139,14 @@ contract Auction {
         
     }
 
+}
+
+// Creating scalability for teh auctions so that multiple auctions can be deployed.
+contract AuctionCreator{
+    Auction[] public auctions;
+
+    function createAuction() public {
+        Auction newAuction = new Auction(msg.sender);
+        auctions.push(newAuction);
+    }
 }
