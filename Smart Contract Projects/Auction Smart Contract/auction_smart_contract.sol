@@ -2,6 +2,7 @@
 
 pragma solidity >=0.5.0 <0.9.0;
 
+// This contract is only for one auction how to make this contract valid for thousand of auctions. We should create another contract that deploys this auction contract 
 contract Auction {
     /* 
     Step 1 : Declare the state variables. 
@@ -108,8 +109,9 @@ contract Auction {
     // its own. This helps reduce teh re-entrance attacks. 
 
     function finalizeAuction() public {
-        require(auctionState == State.Cancelled || block.number > endBlock);
-        require(msg.sender == owner || bids[msg.sender]>0);
+        // How to stop the bidder from calling this function more than once
+        require(auctionState == State.Cancelled || block.number > endBlock, "Auction is still running, Cannot finalize the auction");
+        require(msg.sender == owner || bids[msg.sender]>0, "You cannot call finalize auction function twice unless you are the owner OR You did not bid for this auction");
 
         
         address payable recepient;
@@ -132,7 +134,9 @@ contract Auction {
                 }
             }
         }
+        bids[recepient] = 0; // to prevent the function from being misused by the bidder calling teh function again and again  
         recepient.transfer(value);
+        
     }
 
 }
